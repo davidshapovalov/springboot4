@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail študenta</title>
+</head>
+<body>
+<h2>UBIAN - Detail študenta</h2>
+<h3>Informácie o študentovi</h3>
+
+<p><strong>Meno:</strong> <span th:text="${student.firstName}"></span></p>
+<p><strong>Priezvisko:</strong> <span th:text="${student.lastName}"></span></p>
+<p><strong>Dátum narodenia:</strong> <span th:text="${#temporals.format(student.birthDate, 'dd. MM. yyyy')}"></span></p>
+<p><strong>Pohlavie:</strong> <span th:text="${student.gender} != 'MALE' ? 'Žena' : 'Muž'"></span></p>
+<p><strong>Email:</strong> <span th:text="${student.email}"></span></p>
+<p><strong>Telefón:</strong> <span th:text="${student.phone}"></span></p>
+<p><strong>Kredit:</strong> <span th:text="${#numbers.formatDecimal(student.credit, 1, 'WHITESPACE', 2, 'COMMA')}"></span> €</p>
+
+<a th:href="@{/students}">Späť na zoznam</a>
+
+<form th:action="@{'/students/' + ${student.id} + '/edit'}" method="get" style="display:inline; margin-left: 10px;">
+    <button type="submit">Upraviť</button>
+</form>
+<form th:action="@{'/students/' + ${student.id} + '/delete'}" method="post" style="display:inline; margin-left: 5px;">
+    <button type="submit" onclick="return confirm('Naozaj vymazať tohto študenta?');">Vymazať</button>
+</form>
+</body>
+</html>

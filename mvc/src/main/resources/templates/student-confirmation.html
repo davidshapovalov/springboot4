@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Potvrdenie študenta</title>
+</head>
+<body>
+<h3>Potvrdenie študenta</h3>
+<p>Vitaj študent <b><span th:text="${student.firstName + ' ' + student.lastName}"></span></b>.</p>
+<p>Email: <b><span th:text="${student.email}"></span></b></p>
+<p>Krajina: <b><span th:text="${student.country}"></span></b></p>
+</body>
+</html>

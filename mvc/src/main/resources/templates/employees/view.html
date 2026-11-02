@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail zamestnanca</title>
+</head>
+<body>
+<h2>Detail zamestnanca</h2>
+
+<p><strong>Meno:</strong> <span th:text="${employee.firstName}"></span></p>
+<p><strong>Priezvisko:</strong> <span th:text="${employee.lastName}"></span></p>
+<p><strong>Dátum narodenia:</strong> <span th:text="${#temporals.format(employee.birthDate, 'dd. MM. yyyy')}"></span></p>
+<p><strong>Email:</strong> <span th:text="${employee.email}"></span></p>
+<p><strong>Telefón:</strong> <span th:text="${employee.phone}"></span></p>
+<p><strong>Pozícia:</strong> <span th:text="${employee.jobTitle}"></span></p>
+<p><strong>Plat:</strong> <span th:text="${#numbers.formatDecimal(employee.salary, 1, 'WHITESPACE', 2, 'COMMA')}"></span> €</p>
+<p><strong>Úväzok:</strong> <span th:text="${employee.fullTime}"></span></p>
+
+<a th:href="@{/employees}">Späť na zoznam</a>
+
+<form th:action="@{'/employees/' + ${employee.id} + '/edit'}" method="get" style="display:inline; margin-left: 10px;">
+    <button type="submit">Upraviť</button>
+</form>
+<form th:action="@{'/employees/' + ${employee.id} + '/delete'}" method="post" style="display:inline; margin-left: 5px;">
+    <button type="submit" onclick="return confirm('Naozaj vymazať zamestnanca?');">Vymazať</button>
+</form>
+</body>
+</html>

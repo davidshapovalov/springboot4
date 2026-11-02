@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulár študenta</title>
+</head>
+<body>
+<h2 th:text="${student.id != null ? 'UBIAN - Upraviť existujúceho študenta' : 'UBIAN - Pridať nového študenta'}"></h2>
+
+<form th:action="@{${student.id != null ? '/students/' + student.id : '/students'}}" th:object="${student}" method="post">
+    <p>Meno: <br><input type="text" th:field="*{firstName}" placeholder="Zadajte Vaše meno" required></p>
+    <p>Priezvisko: <br><input type="text" th:field="*{lastName}" placeholder="Zadajte Vaše priezvisko" required></p>
+    <p>Dátum narodenia: <br><input type="date" th:field="*{birthDate}" required></p>
+    <p>Pohlavie: <br>
+        <select th:field="*{gender}" required>
+            <option value="" disabled selected>Vyberte si pohlavie</option>
+            <option value="MALE">Muž</option>
+            <option value="FEMALE">Žena</option>
+        </select>
+    </p>
+    <p>Email: <br><input type="email" th:field="*{email}" placeholder="Vložte Vašu emailovú adresu" required></p>
+    <p>Telefón: <br><input type="tel" th:field="*{phone}" placeholder="Zadajte svoje telefónne číslo"></p>
+    <p>Kredit: <br><input type="number" step="0.01" th:field="*{credit}" placeholder="Zadajte kredit" required></p>
+
+    <a th:href="@{/students}">Späť na zoznam</a>
+    <button type="submit" th:text="${student.id != null ? 'Upraviť študenta' : 'Pridať študenta'}"></button>
+</form>
+</body>
+</html>

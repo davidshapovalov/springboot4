@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrácia študenta</title>
+</head>
+<body>
+<h3>Formulár pre študenta</h3>
+<form th:action="@{/spracujFormular}" th:object="${student}" method="POST">
+    Meno: <input type="text" th:field="*{firstName}"/><br><br>
+    Priezvisko: <input type="text" th:field="*{lastName}"/><br><br>
+    Email: <input type="email" th:field="*{email}"/><br><br>
+    Krajina:
+    <select th:field="*{country}">
+        <option th:each="tempCountry : ${countries}"
+                th:value="${tempCountry}"
+                th:text="${tempCountry}"/>
+    </select><br><br>
+    <input type="submit" value="Odoslať"/>
+</form>
+</body>
+</html>

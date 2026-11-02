@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Študenti</title>
+</head>
+<body>
+<h2>UBIAN - Info o študentoch</h2>
+<a th:href="@{/students/create}">Pridať študenta</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Meno</th>
+        <th>Priezvisko</th>
+        <th>Dátum narodenia</th>
+        <th>Akcia</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${#temporals.format(student.birthDate, 'dd. MM. yyyy')}"></td>
+        <td>
+            <form th:action="@{'/students/' + ${student.id}}" method="get" style="display:inline;">
+                <button type="submit">Detail</button>
+            </form>
+            <form th:action="@{'/students/' + ${student.id} + '/edit'}" method="get" style="display:inline;">
+                <button type="submit">Upraviť</button>
+            </form>
+            <form th:action="@{'/students/' + ${student.id} + '/delete'}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('Naozaj vymazať tohto študenta?');">Vymazať</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

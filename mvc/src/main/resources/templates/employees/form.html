@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulár zamestnanca</title>
+</head>
+<body>
+<h2 th:text="${employee.id != null ? 'Upraviť zamestnanca' : 'Pridať zamestnanca'}"></h2>
+
+<form th:action="@{${employee.id != null ? '/employees/' + employee.id : '/employees'}}" th:object="${employee}" method="post">
+    <p>Meno: <br><input type="text" th:field="*{firstName}" required></p>
+    <p>Priezvisko: <br><input type="text" th:field="*{lastName}" required></p>
+    <p>Dátum narodenia: <br><input type="date" th:field="*{birthDate}" required></p>
+    <p>Email: <br><input type="email" th:field="*{email}" required></p>
+    <p>Telefón: <br><input type="tel" th:field="*{phone}"></p>
+
+    <p>Pracovná pozícia: <br>
+        <select th:field="*{jobTitle}" required>
+            <option value="" disabled selected>Vyberte pozíciu</option>
+            <option th:each="job : ${jobTitles}" th:value="${job}" th:text="${job}"></option>
+        </select>
+    </p>
+
+    <p>Plat: <br><input type="number" step="0.01" th:field="*{salary}" required></p>
+
+    <p>Typ úväzku: <br>
+        <span th:each="type : ${employmentTypes}" style="margin-right: 15px;">
+            <input type="radio" th:field="*{fullTime}" th:value="${type}" required>
+            <label th:text="${type}"></label>
+        </span>
+    </p>
+
+    <a th:href="@{/employees}">Späť na zoznam</a>
+    <button type="submit" th:text="${employee.id != null ? 'Upraviť' : 'Pridať'}"></button>
+</form>
+</body>
+</html>
